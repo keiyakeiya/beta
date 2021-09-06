@@ -41,7 +41,7 @@ form {
   box-sizing: border-box;
   padding: 10px 40px;
   border-radius: 4px;
-  font-size: 25px;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -94,6 +94,10 @@ form {
   pointer-events: none;
 }
 
+#deviceList:before {
+  opacity: 0;
+}
+
 .m-form-select select {
   width: 100%;
   padding: 0 8px;
@@ -110,6 +114,10 @@ form {
 
 .m-form-select select::-ms-expand {
   display: none;
+}
+
+#deviceList select {
+  background-color: #80aeff;
 }
 
 #date {
@@ -164,7 +172,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .m-form-select, #date, #submit {
   width: 100%;
-  height: calc(100%/10);
+  height: calc(100%/15);
+}
+
+#deviceList {
+  height: calc(100%/3);
 }
 
 #takeYear, #takeMonth, #takeDay, #takefull {
@@ -176,7 +188,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 #submitButton {

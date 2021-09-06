@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="header">
-      <span>顕微鏡使用予定入力フォーム</span>
+      <span>顕微鏡使用予定表</span>
     </div>
     <div id="main">
       <div id="cal"></div>
@@ -23,9 +23,12 @@
           </select>
         </div>
         <div id="deviceList" class="m-form-select">
-          <select name="entry.783354646" required>
+          <select required multiple>
             <option value="" disabled selected style="display:none;">顕微鏡</option>
           </select>
+          <div id="hiddenInputs" style="display:none;">
+
+          </div>
         </div>
         <div id="date">
           <input id="actingin" type="date" required>
@@ -61,6 +64,7 @@
             <option value="グラファイト" style="background-color:#616161;">グラファイト</option>
           </select>
         </div>
+        <input type="text" name="entry.233889689" value="" style="display:none;" id="keyInput">
         <div id="submit">
           <button id="submitButton" type="submit" name="button" value="送信">送信</button>
           <!-- <button id="submitButton" type="submit" name="button" value="送信">送信</button> -->

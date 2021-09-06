@@ -86,7 +86,7 @@ if (yourName !== null) {
 
 
 // device ↓
-const devices = ['device1', 'device2', 'device3', 'device4'];
+const devices = ['device1', 'device2', 'device3', 'device4', 'device5', 'device6', 'device7', 'device8'];
 let deviceSelector = document.querySelector('#deviceList select');
 for(let i=0; i<devices.length; i++) {
   deviceSelector.insertAdjacentHTML('beforeEnd',returnOption(devices[i]));
@@ -95,6 +95,19 @@ const yourDevice = JSON.parse(window.localStorage.getItem('lastUsedDevice'));
 if (yourDevice !== null) {
   deviceSelector.value = yourDevice;
 }
+deviceSelector.addEventListener("input", () => {
+  let deviceOptions  = document.querySelectorAll('#deviceList select option');
+  let hiddenInputs = document.querySelector('#hiddenInputs');
+  while (hiddenInputs.firstChild) {
+    hiddenInputs.removeChild(hiddenInputs.firstChild);
+  }
+  for (let i=1; i<=devices.length; i++) {
+    if (deviceOptions[i].selected) {
+      const inputElem = `<input type="text" name="entry.783354646" value="${devices[i-1]}">`;
+      hiddenInputs.insertAdjacentHTML('beforeEnd',inputElem);
+    }
+  }
+},false);
 // device ↑
 
 // schedule color ↓
@@ -154,13 +167,16 @@ const calendarElem = `<iframe src="https://calendar.google.com/calendar/embed?he
 document.body.querySelector('#cal').insertAdjacentHTML('afterBegin', calendarElem);
 // iframe ↑
 
+// key ↓
+let keyElem = document.querySelector('#keyInput');
+keyElem.value = window.localStorage.getItem('validation')
+// key ↑
 // submition ↓
 let submitForm = () => {
   window.localStorage.setItem('lastUsedName', JSON.stringify(userSelector.value));
   window.localStorage.setItem('lastUsedDevice', JSON.stringify(deviceSelector.value));
   window.localStorage.setItem('lastUsedColor', JSON.stringify(colorSelector.value))
-  alert('Completed.');
 
-  setTimeout( () => location.reload(), 100);
+  // setTimeout( () => location.reload(), 100);
 };
 // submition ↑
