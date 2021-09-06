@@ -33,24 +33,20 @@ actingInput.addEventListener("input", () => {
 },false);
 // date ↑
 
-// form height ↓
-// let formElem = document.querySelector('form');
-// formElem.style.height = innerHeight*0.86 + 'px';
-// formElem.style.marginTop = innerHeight*0.02 + 'px';
-// formElem.style.marginBottom = innerHeight*0.02 + 'px';
-// let calElem = document.querySelector('#cal');
-// calElem.style.marginTop = innerHeight*0.04 + 'px';
-// calElem.style.marginBottom = innerHeight*0.02 + 'px';
-// let mainElem = document.querySelector('#main');
-// mainElem.style.marginTop = innerHeight*0.1 + 'px';
+// iframe ↓
+const calendarElem = `<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTokyo&src=NnNoNmQ2ZW51bmptMmQ4ODlmN3MycnYxcW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23AD1457&showTitle=0&showTz=0&mode=WEEK&showPrint=0&showNav=1&showDate=0&showTabs=0&showCalendars=0" width="${innerWidth*0.9}" height="${(innerWidth>=600)?(innerHeight*0.85):(innerHeight*0.55)}" frameborder="0" scrolling="no"></iframe>`;
+document.body.querySelector('#cal').insertAdjacentHTML('afterBegin', calendarElem);
+// iframe ↑
+
 let resizeForm = () => {
   let formElem = document.querySelector('form');
   formElem.style.height = innerHeight*0.86 + 'px';
   formElem.style.marginTop = innerHeight*0.02 + 'px';
   formElem.style.marginBottom = innerHeight*0.02 + 'px';
   let calElem = document.querySelector('#cal');
-  calElem.style.marginTop = innerHeight*0.04 + 'px';
+  calElem.style.marginTop = (innerWidth>=600)?(innerHeight*0.02):(innerHeight*0.04) + 'px';
   calElem.style.marginBottom = innerHeight*0.02 + 'px';
+  calElem.querySelector('iframe').height =  (innerWidth>=600)?(innerHeight*0.85):(innerHeight*0.55);
   let mainElem = document.querySelector('#main');
   mainElem.style.marginTop = innerHeight*0.1 + 'px';
 };
@@ -162,11 +158,6 @@ if (yourColor !== null) {
 }
 // schedule color ↑
 
-// iframe ↓
-const calendarElem = `<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTokyo&src=NnNoNmQ2ZW51bmptMmQ4ODlmN3MycnYxcW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23AD1457&showTitle=0&showTz=0&mode=WEEK&showPrint=0&showNav=1&showDate=0&showTabs=0&showCalendars=0" width="${innerWidth*0.9}" height="${innerHeight*0.55}" frameborder="0" scrolling="no"></iframe>`;
-document.body.querySelector('#cal').insertAdjacentHTML('afterBegin', calendarElem);
-// iframe ↑
-
 // key ↓
 let keyElem = document.querySelector('#keyInput');
 keyElem.value = window.localStorage.getItem('validation')
@@ -174,8 +165,8 @@ keyElem.value = window.localStorage.getItem('validation')
 // submition ↓
 let submitForm = () => {
   window.localStorage.setItem('lastUsedName', JSON.stringify(userSelector.value));
-  window.localStorage.setItem('lastUsedDevice', JSON.stringify(deviceSelector.value));
-  window.localStorage.setItem('lastUsedColor', JSON.stringify(colorSelector.value))
+  window.localStorage.setItem('lastUsedDevice', JSON.stringify(deviceSelector.value)); //<==
+  window.localStorage.setItem('lastUsedColor', JSON.stringify(colorSelector.value));
 
   // setTimeout( () => location.reload(), 100);
 };
