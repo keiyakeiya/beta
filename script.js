@@ -16,8 +16,8 @@ monthInput.value = Number(dispMonth);
 dayInput.value   = Number(dispDate);
 fullInput.value  = now.getTime();
 
-// dateSpan.innerHTML = dispYear +'/' +dispMonth +'/' +dispDate;
-dateSpan.innerHTML = '日付';
+dateSpan.innerHTML = dispYear +'/' +dispMonth +'/' +dispDate;
+// dateSpan.innerHTML = '日付';
 
 actingInput.addEventListener("input", () => {
   const result = actingInput.value;
@@ -89,18 +89,31 @@ let deviceSelector = document.querySelector('#deviceList select');
 for(let i=0; i<devices.length; i++) {
   deviceSelector.insertAdjacentHTML('beforeEnd',returnOption(devices[i]));
 }
+let usingDevice = [];
 const yourDevice = JSON.parse(window.localStorage.getItem('lastUsedDevice'));
 if (yourDevice !== null) {
-  deviceSelector.value = yourDevice;
+  let deviceOptions  = document.querySelectorAll('#deviceList select option');
+  deviceOptions[0].selected = false;
+  let hiddenInputs = document.querySelector('#hiddenInputs');
+  while (hiddenInputs.firstChild) {
+    hiddenInputs.removeChild(hiddenInputs.firstChild);
+  }
+  for(let i=0; i<yourDevice.length; i++) {
+    if (yourDevice[i]) {
+      const inputElem = `<input type="text" name="entry.783354646" value="${devices[i-1]}">`;
+      hiddenInputs.insertAdjacentHTML('beforeEnd',inputElem);
+      deviceOptions[i+1].selected = true;
+    }
+  }
+  usingDevice = yourDevice.concat();
 }
-let usingDevice = [];
 deviceSelector.addEventListener("input", () => {
   let deviceOptions  = document.querySelectorAll('#deviceList select option');
   let hiddenInputs = document.querySelector('#hiddenInputs');
   while (hiddenInputs.firstChild) {
     hiddenInputs.removeChild(hiddenInputs.firstChild);
   }
-  for (let i=1; i<=devices.length; i++) {
+  for(let i=1; i<=devices.length; i++) {
     usingDevice[i-1] = false;
     if (deviceOptions[i].selected) {
       const inputElem = `<input type="text" name="entry.783354646" value="${devices[i-1]}">`;
@@ -170,7 +183,7 @@ keyElem.value = window.localStorage.getItem('validation')
 // submition ↓
 let submitForm = () => {
   window.localStorage.setItem('lastUsedName', JSON.stringify(userSelector.value));
-  window.localStorage.setItem('lastUsedDevice', JSON.stringify(deviceSelector.value)); //<==
+  window.localStorage.setItem('lastUsedDevice', JSON.stringify(usingDevice)); //<==
   window.localStorage.setItem('lastUsedColor', JSON.stringify(colorSelector.value));
 
   // setTimeout( () => location.reload(), 100);
