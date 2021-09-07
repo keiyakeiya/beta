@@ -93,6 +93,7 @@ const yourDevice = JSON.parse(window.localStorage.getItem('lastUsedDevice'));
 if (yourDevice !== null) {
   deviceSelector.value = yourDevice;
 }
+let usingDevice = [];
 deviceSelector.addEventListener("input", () => {
   let deviceOptions  = document.querySelectorAll('#deviceList select option');
   let hiddenInputs = document.querySelector('#hiddenInputs');
@@ -100,9 +101,11 @@ deviceSelector.addEventListener("input", () => {
     hiddenInputs.removeChild(hiddenInputs.firstChild);
   }
   for (let i=1; i<=devices.length; i++) {
+    usingDevice[i-1] = false;
     if (deviceOptions[i].selected) {
       const inputElem = `<input type="text" name="entry.783354646" value="${devices[i-1]}">`;
       hiddenInputs.insertAdjacentHTML('beforeEnd',inputElem);
+      usingDevice[i-1] = true;
     }
   }
 },false);
