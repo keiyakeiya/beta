@@ -33,12 +33,15 @@ actingInput.addEventListener("input", () => {
 },false);
 // date ↑
 
+
 // iframe ↓
 const calendarElem = `<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTokyo&src=NnNoNmQ2ZW51bmptMmQ4ODlmN3MycnYxcW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23AD1457&showTitle=0&showTz=0&mode=WEEK&showPrint=0&showNav=1&showDate=0&showTabs=0&showCalendars=0" width="${innerWidth*0.9}" height="${(innerWidth>=600)?(innerHeight*0.85):(innerHeight*0.55)}" frameborder="0" scrolling="no"></iframe>`;
 // const calendarElem = `<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FTokyo&src=NnNoNmQ2ZW51bmptMmQ4ODlmN3MycnYxcW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23AD1457&showTitle=0&showTz=0&mode=WEEK&showPrint=0&showNav=1&showDate=0&showTabs=0&showCalendars=0" width="${innerWidth*0.9}" height="${innerHeight*0.55}" frameborder="0" scrolling="no"></iframe>`;
 document.body.querySelector('#cal').insertAdjacentHTML('afterBegin', calendarElem);
 // iframe ↑
 
+
+// form height ↓
 let resizeForm = () => {
   let formElem = document.querySelector('form');
   formElem.style.height = innerHeight*0.86 + 'px';
@@ -53,9 +56,9 @@ let resizeForm = () => {
   mainElem.style.marginTop = innerHeight*0.1 + 'px';
 };
 resizeForm();
-
 window.addEventListener("resize", () => resizeForm(),false);
 // form height ↑
+
 
 // start & end time list ↓
 let startTimeElm = document.querySelector('#startTime select');
@@ -68,6 +71,7 @@ for(let i=0; i <15; i++) {
   endTimeElm.insertAdjacentHTML('beforeEnd', insertElem);
 }
 // start & end time list ↑
+
 
 // user name ↓
 const members = ['user1', 'user2', 'user3', 'user4'];
@@ -124,6 +128,7 @@ deviceSelector.addEventListener("input", () => {
 },false);
 // device ↑
 
+
 // schedule color ↓
 let cname2Hex = (cname) => {
   let result;
@@ -176,16 +181,24 @@ if (yourColor !== null) {
 }
 // schedule color ↑
 
+
 // key ↓
 let keyElem = document.querySelector('#keyInput');
-keyElem.value = window.localStorage.getItem('validation')
+let key = JSON.parse(window.localStorage.getItem('validation'));
+if (key !== null) {
+  keyElem.value = key;
+} else {
+  key = prompt('Password');
+  window.localStorage.setItem('validation', JSON.stringify(key));
+}
 // key ↑
+
+
 // submition ↓
 let submitForm = () => {
   window.localStorage.setItem('lastUsedName', JSON.stringify(userSelector.value));
-  window.localStorage.setItem('lastUsedDevice', JSON.stringify(usingDevice)); //<==
+  window.localStorage.setItem('lastUsedDevice', JSON.stringify(usingDevice));
   window.localStorage.setItem('lastUsedColor', JSON.stringify(colorSelector.value));
-
   // setTimeout( () => location.reload(), 100);
 };
 // submition ↑
