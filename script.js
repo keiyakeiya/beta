@@ -205,8 +205,8 @@ let submitForm = () => {
   window.localStorage.setItem('lastUsedColor', JSON.stringify(colorSelector.value));
   // setTimeout( () => location.reload(), 100);
   
-  jump2Top();
-  document.querySelector('#cal iframe').contentWindow.location.reload();
+//   jump2Top();
+  window.location.reload();
 
 };
 // submition ↑
